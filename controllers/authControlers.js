@@ -4,15 +4,23 @@ const handleErrors = (err)=> {
     console.log(err.message, err.code);
     let errors = { eamil : ''  , password: ''}
 
+
+    // duplicate error
+if(err.code===11000){
+    errors.eamil = 'email already registered'
+    return errors;
+}
+
     //validation errors handles
     if(err.message.includes('user validation failed')){
-        object.values(err.errors).forEach(({properties}) => {
+        Object.values(err.errors).forEach(({properties}) => {
         errors[properties.path]= properties.message;
             
         });
-    }
+    }       
     return errors
 }
+
 
 module.exports.signup_get = (req,res) =>{
     res.render('signup');
