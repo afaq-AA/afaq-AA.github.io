@@ -1,9 +1,17 @@
 const User = require("../models/User");
-const user = User()
-// const user = require(User)
+//handle errors
+const handleErrors = (err)=> {
+    console.log(err.message, err.code);
+    let error = { eamil : ''  , password: ''}
 
-
-
+    //validation errors handles
+    if(err.message.includes('user validation failed')){
+        object.values(err.errors).forEach(error => {
+            console.log (error.properties);
+            
+        });
+    }
+}
 
 module.exports.signup_get = (req,res) =>{
     res.render('signup');
@@ -22,7 +30,7 @@ module.exports.signup_post = async (req,res) =>{
 
     }
     catch (err ){
-        console.log(err);
+       const error =  handleErrors(err);
         res.status(400).send('error, user not created')
     }
 }
