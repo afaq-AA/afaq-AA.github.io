@@ -2,15 +2,16 @@ const User = require("../models/User");
 //handle errors
 const handleErrors = (err)=> {
     console.log(err.message, err.code);
-    let error = { eamil : ''  , password: ''}
+    let errors = { eamil : ''  , password: ''}
 
     //validation errors handles
     if(err.message.includes('user validation failed')){
-        object.values(err.errors).forEach(error => {
-            console.log (error.properties);
+        object.values(err.errors).forEach(({properties}) => {
+        errors[properties.path]= properties.message;
             
         });
     }
+    return errors
 }
 
 module.exports.signup_get = (req,res) =>{
@@ -30,8 +31,8 @@ module.exports.signup_post = async (req,res) =>{
 
     }
     catch (err ){
-       const error =  handleErrors(err);
-        res.status(400).send('error, user not created')
+       const errors =  handleErrors(err);
+        res.status(400).json({ errors})
     }
 }
 
