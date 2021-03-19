@@ -2,12 +2,12 @@ const User = require("../models/User");
 //handle errors
 const handleErrors = (err)=> {
     console.log(err.message, err.code);
-    let errors = { eamil : ''  , password: ''}
+    let errors = { email : ''  , password: ''}
 
 
     // duplicate error
 if(err.code===11000){
-    errors.eamil = 'email already registered'
+    errors.email = 'email already registered';
     return errors;
 }
 
@@ -21,7 +21,7 @@ if(err.code===11000){
     return errors
 }
 
-
+//controleers aactions 
 module.exports.signup_get = (req,res) =>{
     res.render('signup');
 }
