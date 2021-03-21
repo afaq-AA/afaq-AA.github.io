@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 // database connection
 const dbURI = 'mongodb+srv://exampledata:mongodb@cluster0.j15k9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
-  .then((result) => app.listen(3000), console.log('server is running'))
+  .then((result) => app.listen(4000), console.log('server is running'))
   .catch((err) => console.log(err));
 
 // routes
