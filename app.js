@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser')
+const {requireAuth} = require('./middleware/authMiddleware')
 
 
 const app = express();
@@ -16,12 +17,12 @@ app.set('view engine', 'ejs');
 // database connection
 const dbURI = 'mongodb+srv://exampledata:mongodb@cluster0.j15k9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
-  .then((result) => app.listen(4000), console.log('server is running'))
+  .then((result) => app.listen(5000), console.log('server is running'))
   .catch((err) => console.log(err));
 
 // routes
 app.get('/', (req, res) => res.render('home'));
-app.get('/smoothies', (req, res) => res.render('smoothies')); 
+app.get('/smoothies',requireAuth, (req, res) => res.render('smoothies'));  
 
 app.use(authRoutes);
 // //cookies
@@ -39,6 +40,3 @@ app.use(authRoutes);
 
 
 // }); 
-
-
-
