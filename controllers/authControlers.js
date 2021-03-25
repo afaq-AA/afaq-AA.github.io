@@ -80,3 +80,8 @@ module.exports.login_post = async (req, res) => {
     }
     res.send('user login')
 }
+
+module.exports.logout_get = async (req,res)=>{
+    res.cookie('jwt', '', {maxAge : 1})
+    console.log('user logout redirect to home page')
+}

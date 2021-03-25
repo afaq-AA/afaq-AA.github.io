@@ -1,3 +1,4 @@
+
 <%- include('partials/header'); -%>
 
 <form action="/signup">
@@ -33,10 +34,10 @@
       });
       const data = await res.json();
       console.log(data);
-      // if (data.errors) {
-      //   emailError.textContent = data.errors.email;
-      //   passwordError.textContent = data.errors.password;
-      // }
+      if (data.errors) {
+        emailError.textContent = data.errors.email;
+        passwordError.textContent = data.errors.password;
+      }
       if (data.user) {
         location.assign('/');
       }
@@ -44,5 +45,5 @@
     catch (err) {
       console.log(err);
     }
-    });
+  });
 </script>
